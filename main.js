@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 import pokemon from "./data/pokemon_4x6.js";
+=======
+import pokemon from "./data/pokemon_4x3.js";
+function cree_buisson(nb_buisson) {
+  const grille = document.querySelector("#grille_de_jeu");
+  for (let i = 0; i < nb_buisson; i++) {
+    let buisson = document.createElement("div");
+    // const select_buisson = grille.querySelector(buisson);
+    let image = document.createElement("img");
+    image.src = "./assets/bush.webp";
+    image.setAttribute("class","bush");
+
+>>>>>>> c300902e9d96071584adc56fae30855f8883e7be
 
 function creer_buissons(nb_memos) {
   //Fonction qui créer tous les buissons
