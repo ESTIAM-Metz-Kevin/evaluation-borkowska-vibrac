@@ -38,6 +38,16 @@ function disposer_pokemons(nb_memos, pokemon) {
     }
   }
   console.log(placement_grille);
+
+  for (let i = 0; i < 20; i++) {
+    let indice_aleatoire_1 = Math.floor(Math.random() * nb_memos);
+    let indice_aleatoire_2 = Math.floor(Math.random() * nb_memos);
+    let valeur_temporaire = placement_grille[indice_aleatoire_1];
+    placement_grille[indice_aleatoire_1] = placement_grille[indice_aleatoire_2];
+    placement_grille[indice_aleatoire_2] = valeur_temporaire;
+  }
+
+  console.log(placement_grille);
 }
 
 creer_buissons(12);
