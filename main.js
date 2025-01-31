@@ -7,7 +7,8 @@ function cree_buisson(nb_buisson) {
     let image = document.createElement("img");
     image.src = "./assets/bush.webp";
     image.setAttribute("class","bush");
-    image.setAttribute("class","bush:hover");
+
+
     buisson.appendChild(image);
     grille.appendChild(buisson);
   }
