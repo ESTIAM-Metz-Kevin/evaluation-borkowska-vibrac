@@ -13,6 +13,7 @@ function creer_element(image_source) {
   let element = document.createElement("div");
   let image = document.createElement("img");
   image.src = image_source;
+  image.classList.add("bush");
 
   element.appendChild(image);
   grille.appendChild(element);
@@ -48,8 +49,9 @@ function disposer_pokemons(nb_memos, pokemon) {
   }
 
   console.log(placement_grille);
+  return placement_grille;
 }
 
 creer_buissons(12);
-disposer_pokemons(12, pokemon);
+const memo_pokemons = disposer_pokemons(12, pokemon);
 console.log(pokemon);
