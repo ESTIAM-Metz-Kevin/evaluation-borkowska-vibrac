@@ -6,6 +6,8 @@ function cree_buisson(nb_buisson) {
     // const select_buisson = grille.querySelector(buisson);
     let image = document.createElement("img");
     image.src = "./assets/bush.webp";
+    image.setAttribute("class","bush");
+
 
     buisson.appendChild(image);
     grille.appendChild(buisson);
