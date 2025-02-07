@@ -1,5 +1,14 @@
 import pokemon from "./data/pokemon_4x6.js";
 
+function jeu() {
+  creer_buissons(12);
+  const memo_pokemons = disposer_pokemons(12, pokemon);
+
+  while () {
+    clic(memo_pokemons);
+  }
+}
+
 function creer_buissons(nb_memos) {
   //Fonction qui créer tous les buissons
   for (let i = 0; i < nb_memos; i++) {
@@ -85,6 +94,7 @@ function clic(memo_pokemons) {
         image.classList.remove("bush");
       }
       if (nb == 2) {
+        nb += 1;
         return gagne(tableau_lance, memo_pokemons);
       }
     };
@@ -115,10 +125,17 @@ function gagne(tableau_lance, memo_pokemons) {
 
     image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1];
     barre.appendChild(image_pokemon_capture);
+  } else {
+    setTimeout(() => {
+      let division1 = document.getElementById(tableau_lance[0]);
+      let division2 = document.getElementById(tableau_lance[1]);
+
+      let image1 = division1.querySelector("img");
+      let image2 = division2.querySelector("img");
+      image1.src = "./assets/bush.webp";
+      image2.src = "./assets/bush.webp";
+    }, 1000);
   }
 }
 
-creer_buissons(12);
-const memo_pokemons = disposer_pokemons(12, pokemon);
-
-clic(memo_pokemons);
+jeu();
