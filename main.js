@@ -1,11 +1,13 @@
-import pokemon from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
+import data_pokemons from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
+
+const INIT_NB_MEMO = 4
 
 function jeu(nb_buissons) {
   //Fonction principale qui vient lancer les "sous-fonctions"
 
   let fini = 0; //Variable qui fixe la fin du jeu
   creer_buissons(nb_buissons); //Fonction qui crée l'affichage des buissons
-  const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
+  const memo_pokemons = disposer_pokemons(nb_buissons, data_pokemons); //On crée l'emplacement des pokémons
   clic(memo_pokemons, fini); //On appelle la fonction qui gère les actions au clic
 }
 
@@ -186,8 +188,31 @@ function gagne(tableau_lance, memo_pokemons, fini) {
 }
 
 function fin() {
-  console.log;
-  stop;
+  console.log("fin");
+  let block_rejouer_element = document.querySelector("#rejouer");
+  block_rejouer_element.style.display = "flex";
+
+  let slider_element = document.querySelector("#nombre_de_pokemons");
+  slider_element.min = 4;
+  slider_element.max = 24;
+  slider_element.step = 4;
+  slider_element.value = INIT_NB_MEMO;
+
+ /* let nombrePokemons = block_rejouer_element.textContent;
+  block_rejouer_element.textContent = slider_element.value;
+*/
+  let bouton_rejouer = block_rejouer_element.querySelector("button");
+
+  bouton_rejouer.addEventListener('click', function () {
+    block_rejouer_element.style.display = "none";
+    let remise_a_zero = document.querySelectorAll(".box")
+    console.log(remise_a_zero);
+    for (let i = 0; i < remise_a_zero.length; i++) {
+      remise_a_zero[i].remove();
+    }
+    jeu(slider_element.value);
+  });
+
 }
 
-jeu(12); //Appel de la fonction principale
+jeu(INIT_NB_MEMO); //Appel de la fonction principale
