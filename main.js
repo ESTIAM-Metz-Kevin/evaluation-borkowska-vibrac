@@ -5,7 +5,7 @@ function jeu(nb_buissons) {
 
   let fini = 0; //Variable qui fixe la fin du jeu
   creer_buissons(nb_buissons); //Fonction qui crée l'affichage des buissons
-  const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
+  const memo_pokemons = disposer_pokemons(nb_buissons, pokemon); //On crée l'emplacement des pokémons
   clic(memo_pokemons, fini); //On appelle la fonction qui gère les actions au clic
 }
 
@@ -186,8 +186,8 @@ function gagne(tableau_lance, memo_pokemons, fini) {
 }
 
 function fin() {
-  console.log;
+  console.log("a");
   stop;
 }
 
-jeu(12); //Appel de la fonction principale
+jeu(4); //Appel de la fonction principale
