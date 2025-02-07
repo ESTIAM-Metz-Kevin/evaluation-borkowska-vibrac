@@ -11,6 +11,8 @@ function creer_element(image_source) {
   const grille = document.querySelector("#grille_de_jeu");
 
   let element = document.createElement("div");
+  element.classList.add("box"); // Ajout de la classe box
+
   let image = document.createElement("img");
   image.src = image_source;
   image.classList.add("bush");
@@ -108,3 +110,5 @@ creer_buissons(12);
 const memo_pokemons = disposer_pokemons(12, pokemon);
 
 clic(memo_pokemons);
+console.log(pokemon);
+clic();
