@@ -81,8 +81,10 @@ function clic(memo_pokemons) {
   let division = grille.querySelectorAll("div");
 
   for (let i = 0; i < division.length; i++) {
+    console.log(i);
     let image = division[i].querySelector("img");
     division[i].onclick = function () {
+      console.log(nb);
       if (nb < 2) {
         tableau_lance.push(i);
         nb++;
@@ -99,6 +101,8 @@ function clic(memo_pokemons) {
 }
 
 function gagne(tableau_lance, memo_pokemons) {
+  let coup = document.getElementById("stat_nombre_de_coups");
+  coup += 1;
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
   ) {
@@ -131,6 +135,12 @@ function gagne(tableau_lance, memo_pokemons) {
       let image2 = division2.querySelector("img");
       image1.src = "./assets/bush.webp";
       image2.src = "./assets/bush.webp";
+
+      image1.classList.add("bush");
+      image1.classList.remove("pokemon");
+
+      image2.classList.add("bush");
+      image2.classList.remove("pokemon");
     }, 1000);
   }
   clic(memo_pokemons);
