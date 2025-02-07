@@ -105,6 +105,13 @@ function gagne(tableau_lance, memo_pokemons) {
   let compteur = document.getElementById("stat_nombre_de_coups");
   let nb_coups = parseInt(compteur.textContent);
   compteur.textContent = nb_coups + 1;
+  let record = 0
+  if (nb_coups > record)
+  {
+    let stock_record = nb_coups;
+    localStorage.getItem("record", stock_record )
+  }
+  let affiche_record = document.getElementById("stat_record");
 
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
