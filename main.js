@@ -32,35 +32,38 @@ function creer_element(image_source, id) {
 
 function disposer_pokemons(nb_memos, pokemon) {
   //Fonction qui va "disposer" les pokémons
-  let placement_grille = [];
+  let placement_grille = []; //Tableau qui va stocker les pokémons
 
   while (placement_grille.length < nb_memos) {
-    let nombre_aleatoire = Math.floor(Math.random() * nb_memos);
-    let nb_occurence = 0;
+    //Tant que le tableau n'est pas complet
+    let nombre_aleatoire = Math.floor(Math.random() * nb_memos); //Nombre aléatoire
+    let nb_occurence = 0; //Nombre d'occurence du pokémon (pour éviter les doublons de paires)
     for (let i = 0; i < placement_grille.length; i++) {
       if (pokemon[nombre_aleatoire]["name"] == placement_grille[i][0]) {
+        //Si le pokémon est déjà dans la liste on ne l'ajoute pas
         nb_occurence += 1;
       }
     }
     if (nb_occurence == 0) {
-      console.log(nb_occurence);
+      //S'il n'est pas dans la liste
       placement_grille.push([
         pokemon[nombre_aleatoire]["name"],
         pokemon[nombre_aleatoire]["sprite"],
-      ]);
+      ]); //On ajoute le premier pokemon de la paire
       placement_grille.push([
         pokemon[nombre_aleatoire]["name"],
         pokemon[nombre_aleatoire]["sprite"],
-      ]);
+      ]); //Puis le second
       nb_occurence += 1;
     }
   }
 
   for (let i = 0; i < 20; i++) {
-    let indice_aleatoire_1 = Math.floor(Math.random() * nb_memos);
+    //Rendre la liste aléatoire
+    let indice_aleatoire_1 = Math.floor(Math.random() * nb_memos); //2 nombres aléatoires
     let indice_aleatoire_2 = Math.floor(Math.random() * nb_memos);
-    let valeur_temporaire = placement_grille[indice_aleatoire_1][0];
-    let lien_temporaire = placement_grille[indice_aleatoire_1][1];
+    let valeur_temporaire = placement_grille[indice_aleatoire_1][0]; //Valeur de nom tampon
+    let lien_temporaire = placement_grille[indice_aleatoire_1][1]; //Valeur de lien tampon
 
     placement_grille[indice_aleatoire_1][0] =
       placement_grille[indice_aleatoire_2][0];
@@ -69,84 +72,89 @@ function disposer_pokemons(nb_memos, pokemon) {
 
     placement_grille[indice_aleatoire_2][0] = valeur_temporaire;
     placement_grille[indice_aleatoire_2][1] = lien_temporaire;
-  }
+  } //Changement des valeurs (mélange)
 
-  console.log(placement_grille);
-  return placement_grille;
+  console.log(placement_grille); //Affichage dans la console pour tester
+  return placement_grille; //On retourne le bon affichage
 }
 
 function clic(memo_pokemons) {
-  let nb = 0;
-  let tableau_lance = [];
-  let grille = document.querySelector("#grille_de_jeu");
-  let division = grille.querySelectorAll("div");
+  //Fonction lors du clic
+  let nb = 0; //Nombre de clics
+  let tableau_lance = []; //Tableau pour stocker les pokémons cliqués
+  let grille = document.querySelector("#grille_de_jeu"); //Sélecion de la grille
+  let division = grille.querySelectorAll("div"); //Sélection des div
 
   for (let i = 0; i < division.length; i++) {
-    console.log(i);
-    let image = division[i].querySelector("img");
+    let image = division[i].querySelector("img"); //Sélection de l'image
     division[i].onclick = function () {
-      console.log(nb);
+      //Fonction en cas de clic
       if (nb < 2) {
-        tableau_lance.push(i);
-        nb++;
-        image.src = memo_pokemons[i][1];
-        image.classList.add("pokemon");
-        image.classList.remove("bush");
+        //Max de 2 pokémons sélectionnés
+        tableau_lance.push(i); //On ajoute au tableau l'indice de ceux sélectionnés
+        nb++; //On augmente la variable
+        image.src = memo_pokemons[i][1]; //Source de l'image
+        image.classList.add("pokemon"); //On ajoute la classe pokemon
+        image.classList.remove("bush"); //On retire la classe bush
       }
       if (nb == 2) {
-        nb += 1;
-        return gagne(tableau_lance, memo_pokemons);
+        //Quand 2 sont sélectionnés
+        nb += 1; //On augmente de nouveau pour ne pas rerentrer dans le if
+        return gagne(tableau_lance, memo_pokemons); //On appelle une fonction pour voir si on a gagné ou nn
       }
     };
   }
 }
 
 function gagne(tableau_lance, memo_pokemons) {
-  let compteur = document.getElementById("stat_nombre_de_coups");
-  let nb_coups = parseInt(compteur.textContent);
-  compteur.textContent = nb_coups + 1;
+  //Fonction qui vérifie le mémo
+  let compteur = document.getElementById("stat_nombre_de_coups"); //On récupère la variable pour le nombre de coups
+  let nb_coups = parseInt(compteur.textContent); //On récupère le nombre de coups actuels
+  compteur.textContent = nb_coups + 1; //On augmente le nombre de coups
 
   if (
-    memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
+    memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
   ) {
-    let div1 = document.getElementById(tableau_lance[0]);
+    let div1 = document.getElementById(tableau_lance[0]); //On récupère l'id
     let div2 = document.getElementById(tableau_lance[1]);
 
-    let img_pokeball1 = document.createElement("img");
+    let img_pokeball1 = document.createElement("img"); //On crée l'image des pokeballs
     let img_pokeball2 = document.createElement("img");
 
-    img_pokeball1.src = "./assets/pokeball.png";
+    img_pokeball1.src = "./assets/pokeball.png"; //On récupère la source
     img_pokeball2.src = "./assets/pokeball.png";
 
-    img_pokeball1.classList.add("pokeball");
+    img_pokeball1.classList.add("pokeball"); //On ajoute la classe pokeball
     img_pokeball2.classList.add("pokeball");
 
-    div1.appendChild(img_pokeball1);
+    div1.appendChild(img_pokeball1); //On affiche
     div2.appendChild(img_pokeball2);
 
-    let barre = document.querySelector(".liste_pokemons_captures");
-    let image_pokemon_capture = document.createElement("img");
+    let barre = document.querySelector(".liste_pokemons_captures"); //On récupère la barre des pokemons capturés
+    let image_pokemon_capture = document.createElement("img"); //On crée une image
 
-    image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1];
-    barre.appendChild(image_pokemon_capture);
+    image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1]; //On récupère la source de celui capturé
+    barre.appendChild(image_pokemon_capture); //On affiche celui capturé
   } else {
+    //Si perdu
     setTimeout(() => {
-      let division1 = document.getElementById(tableau_lance[0]);
+      //Fonction pour délais
+      let division1 = document.getElementById(tableau_lance[0]); //On récupère les divisions
       let division2 = document.getElementById(tableau_lance[1]);
 
-      let image1 = division1.querySelector("img");
+      let image1 = division1.querySelector("img"); //On sélectionne les images
       let image2 = division2.querySelector("img");
-      image1.src = "./assets/bush.webp";
+      image1.src = "./assets/bush.webp"; //On change la source
       image2.src = "./assets/bush.webp";
 
-      image1.classList.add("bush");
-      image1.classList.remove("pokemon");
+      image1.classList.add("bush"); //On ajoute la classe buisson
+      image1.classList.remove("pokemon"); //Et on retire la classe pokemon
 
       image2.classList.add("bush");
       image2.classList.remove("pokemon");
     }, 1000);
   }
-  clic(memo_pokemons);
+  clic(memo_pokemons); //On rappelle la fonction clic
 }
 
-jeu();
+jeu(); //Appel de la fonction principale
