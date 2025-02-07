@@ -102,7 +102,9 @@ function clic(memo_pokemons, fini) {
       if (nb == 2) {
         //Quand 2 sont sélectionnés
         nb += 1; //On augmente de nouveau pour ne pas rerentrer dans le if
-        fini = gagne(tableau_lance, memo_pokemons, fini); //On appelle une fonction pour voir si on a gagné ou nn
+        setTimeout(() => {
+          fini = gagne(tableau_lance, memo_pokemons, fini); //On appelle une fonction pour voir si on a gagné ou nn
+        }, 1000); //Délais
       }
     };
   }
@@ -154,27 +156,25 @@ function gagne(tableau_lance, memo_pokemons, fini) {
     barre.appendChild(image_pokemon_capture); //On affiche celui capturé
   } else {
     //Si perdu
-    setTimeout(() => {
-      //Fonction pour délais
-      let division1 = document.getElementById(tableau_lance[0]); //On récupère les divisions
-      let division2 = document.getElementById(tableau_lance[1]);
+    //Plus besoin de délais car il est dans la fonction clic
+    let division1 = document.getElementById(tableau_lance[0]); //On récupère les divisions
+    let division2 = document.getElementById(tableau_lance[1]);
 
-      let image1 = division1.querySelector("img"); //On sélectionne les images
-      let image2 = division2.querySelector("img");
-      image1.src = "./assets/bush.webp"; //On change la source
-      image2.src = "./assets/bush.webp";
+    let image1 = division1.querySelector("img"); //On sélectionne les images
+    let image2 = division2.querySelector("img");
+    image1.src = "./assets/bush.webp"; //On change la source
+    image2.src = "./assets/bush.webp";
 
-      image1.classList.add("bush"); //On ajoute la classe buisson
-      image1.classList.remove("pokemon"); //Et on retire la classe pokemon
+    image1.classList.add("bush"); //On ajoute la classe buisson
+    image1.classList.remove("pokemon"); //Et on retire la classe pokemon
 
-      image2.classList.add("bush");
-      image2.classList.remove("pokemon");
-    }, 1000);
+    image2.classList.add("bush");
+    image2.classList.remove("pokemon");
   }
   if (fini == memo_pokemons.length) {
     return fin();
   } else {
-    setInterval(clic, 1000, memo_pokemons, fini); //On rappelle la fonction clic
+    clic(memo_pokemons, fini); //On rappelle la fonction clic
   }
 }
 
