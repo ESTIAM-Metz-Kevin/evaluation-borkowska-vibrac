@@ -2,6 +2,7 @@ import pokemon from "./data/pokemon_4x6.js"; //On importe le tableau des pokémo
 
 function jeu() {
   //Fonction principale qui vient lancer les "sous-fonctions"
+
   let fini = 0; //Variable qui fixe la fin du jeu
   creer_buissons(12); //Fonction qui crée l'affichage des buissons
   const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
@@ -159,7 +160,7 @@ function gagne(tableau_lance, memo_pokemons, fini) {
   if (fini == memo_pokemons.length) {
     return fin();
   } else {
-    clic(memo_pokemons, fini); //On rappelle la fonction clic
+    setInterval(clic, 1000, memo_pokemons, fini); //On rappelle la fonction clic
   }
 }
 
