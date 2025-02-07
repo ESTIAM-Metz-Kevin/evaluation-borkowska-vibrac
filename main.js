@@ -3,15 +3,16 @@ import pokemon from "./data/pokemon_4x6.js";
 function creer_buissons(nb_memos) {
   //Fonction qui créer tous les buissons
   for (let i = 0; i < nb_memos; i++) {
-    creer_element("./assets/bush.webp");
+    creer_element("./assets/bush.webp", i);
   }
 }
 
-function creer_element(image_source) {
+function creer_element(image_source, id) {
   const grille = document.querySelector("#grille_de_jeu");
 
   let element = document.createElement("div");
   element.classList.add("box"); // Ajout de la classe box
+  element.id = id.toString();
 
   let image = document.createElement("img");
   image.src = image_source;
@@ -72,36 +73,55 @@ function clic(memo_pokemons) {
   let tableau_lance = [];
   const grille = document.querySelector("#grille_de_jeu");
   let division = grille.querySelectorAll("div");
-  console.log(division);
 
   for (let i = 0; i < division.length; i++) {
     let image = division[i].querySelector("img");
     division[i].onclick = function () {
       if (nb < 2) {
-        console.log(memo_pokemons);
-        tableau_lance.push(memo_pokemons[i][0]);
+        tableau_lance.push(i);
         nb++;
         image.src = memo_pokemons[i][1];
         image.style.height = "80px";
         image.style.width = "auto";
       }
       if (nb == 2) {
-        return gagne(tableau_lance);
+        return gagne(tableau_lance, memo_pokemons);
       }
     };
   }
 }
 
-function gagne(tableau_lance) {
-  console.log(tableau_lance[0], tableau_lance[1]);
-  if (tableau_lance[0] == tableau_lance[1]) {
+function gagne(tableau_lance, memo_pokemons) {
+  if (
+    memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
+  ) {
     console.log("OK");
-    const grille = document.querySelector("#grille_de_jeu");
-    let division = grille.querySelectorAll("div");
-    let img_pokeball = document.createElement("img");
-    img_pokeball.src = "./assets/pokeball.webp";
+    let div1 = document.getElementById(tableau_lance[0]);
+    let div2 = document.getElementById(tableau_lance[1]);
 
-    grille.appendChild(img_pokeball);
+    let img_pokeball1 = document.createElement("img");
+    let img_pokeball2 = document.createElement("img");
+
+    img_pokeball1.src = "./assets/pokeball.png";
+    img_pokeball2.src = "./assets/pokeball.png";
+
+    div1.appendChild(img_pokeball1);
+    div2.appendChild(img_pokeball2);
+
+    img_pokeball1.style.height = "40px";
+    img_pokeball1.style.width = "auto";
+    img_pokeball1.style.display = "flex";
+    img_pokeball1.position = "absolute";
+    img_pokeball1.style.top = "0";
+    img_pokeball1.style.right = "0";
+
+    img_pokeball2.style.height = "40px";
+    img_pokeball2.style.width = "auto";
+    img_pokeball2.style.position = "absolute";
+    img_pokeball2.style.top = "0";
+    img_pokeball2.style.left = "0";
+
+    div1.position = "relative";
   }
 }
 
@@ -109,4 +129,3 @@ creer_buissons(12);
 const memo_pokemons = disposer_pokemons(12, pokemon);
 
 clic(memo_pokemons);
-console.log(pokemon);
