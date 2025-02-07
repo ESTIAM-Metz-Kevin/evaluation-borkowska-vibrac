@@ -1,7 +1,6 @@
-
 import data_pokemons from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
 
-const INIT_NB_MEMO = 4
+const INIT_NB_MEMO = 4; //Constante initiale
 
 function jeu(nb_buissons) {
   //Fonction principale qui vient lancer les "sous-fonctions"
@@ -44,6 +43,7 @@ function disposer_pokemons(nb_memos, pokemon) {
     let nombre_aleatoire = Math.floor(Math.random() * nb_memos); //Nombre aléatoire
     let nb_occurence = 0; //Nombre d'occurence du pokémon (pour éviter les doublons de paires)
     for (let i = 0; i < placement_grille.length; i++) {
+      console.log(pokemon);
       if (pokemon[nombre_aleatoire]["name"] == placement_grille[i][0]) {
         //Si le pokémon est déjà dans la liste on ne l'ajoute pas
         nb_occurence += 1;
@@ -195,25 +195,24 @@ function fin() {
 
   let slider_element = document.querySelector("#nombre_de_pokemons");
   slider_element.min = 4;
-  slider_element.max = 24;
+  slider_element.max = 12;
   slider_element.step = 4;
   slider_element.value = INIT_NB_MEMO;
 
   /* let nombrePokemons = block_rejouer_element.textContent;
-   block_rejouer_element.textContent = slider_element.value;
- */
+  block_rejouer_element.textContent = slider_element.value;
+*/
   let bouton_rejouer = block_rejouer_element.querySelector("button");
 
-  bouton_rejouer.addEventListener('click', function () {
+  bouton_rejouer.addEventListener("click", function () {
     block_rejouer_element.style.display = "none";
-    let remise_a_zero = document.querySelectorAll(".box")
+    let remise_a_zero = document.querySelectorAll(".box");
     console.log(remise_a_zero);
     for (let i = 0; i < remise_a_zero.length; i++) {
       remise_a_zero[i].remove();
     }
     jeu(slider_element.value);
   });
-
 }
 
 jeu(INIT_NB_MEMO); //Appel de la fonction principale

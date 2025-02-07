@@ -135,3 +135,19 @@ Note sur 100 points ramené à 20.
 
 **Note :** Des points malus peuvent être données à plusieurs équipes si votre code se ressemble très sensiblement ! Soyez originaux et travaillez dans votre groupe. Je n'interdit pas les échanges, mais évitez de copier/coller du code d'autres équipes.
 Cela compte également pour l'Intelligence Artificielle si elle vous fournit du code très similaire d'une équipe à l'autre ;-)
+
+### repartition du travail
+
+- Quentin
+  - boucle principal(reflexion a 2)
+  - disposition aléatoire des pokemon
+  - choix des animation
+  - grille dynamique(pair programing)
+  - reenitialisation des pokemon dans la liste à gauche et des score
+
+- Mathis
+  - boucle principale(reflexion a 2)
+  - bouton rejouer
+  - debut de persistance des donnée mais pas achever
+  - grille dynamique(pair programing)
+  - reenitialisation des bush
