@@ -1,13 +1,13 @@
+
 import data_pokemons from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
 
-const INIT_NB_MEMO = 4;
+const INIT_NB_MEMO = 4
 
 function jeu(nb_buissons) {
   //Fonction principale qui vient lancer les "sous-fonctions"
 
   let fini = 0; //Variable qui fixe la fin du jeu
   creer_buissons(nb_buissons); //Fonction qui crée l'affichage des buissons
-  const memo_pokemons = disposer_pokemons(nb_buissons, pokemon); //On crée l'emplacement des pokémons
   const memo_pokemons = disposer_pokemons(nb_buissons, data_pokemons); //On crée l'emplacement des pokémons
   clic(memo_pokemons, fini); //On appelle la fonction qui gère les actions au clic
 }
@@ -71,9 +71,9 @@ function disposer_pokemons(nb_memos, pokemon) {
     let lien_temporaire = placement_grille[indice_aleatoire_1][1]; //Valeur de lien tampon
 
     placement_grille[indice_aleatoire_1][0] =
-      placement_grille[indice_aleatoire_2][0];
+        placement_grille[indice_aleatoire_2][0];
     placement_grille[indice_aleatoire_1][1] =
-      placement_grille[indice_aleatoire_2][1];
+        placement_grille[indice_aleatoire_2][1];
 
     placement_grille[indice_aleatoire_2][0] = valeur_temporaire;
     placement_grille[indice_aleatoire_2][1] = lien_temporaire;
@@ -134,7 +134,7 @@ function gagne(tableau_lance, memo_pokemons, fini) {
   }
 
   if (
-    memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
+      memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
   ) {
     fini += 2;
     let div1 = document.getElementById(tableau_lance[0]); //On récupère l'id
@@ -158,8 +158,8 @@ function gagne(tableau_lance, memo_pokemons, fini) {
     let barre = document.querySelector(".liste_pokemons_captures"); //On récupère la barre des pokemons capturés
     let image_pokemon_capture = document.createElement("img"); //On crée une image
     image_pokemon_capture.classList.add(
-      "animate__animated",
-      "animate__bounceInRight"
+        "animate__animated",
+        "animate__bounceInRight"
     );
 
     image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1]; //On récupère la source de celui capturé
@@ -189,8 +189,6 @@ function gagne(tableau_lance, memo_pokemons, fini) {
 }
 
 function fin() {
-  console.log("a");
-  stop;
   console.log("fin");
   let block_rejouer_element = document.querySelector("#rejouer");
   block_rejouer_element.style.display = "flex";
@@ -202,19 +200,20 @@ function fin() {
   slider_element.value = INIT_NB_MEMO;
 
   /* let nombrePokemons = block_rejouer_element.textContent;
-  block_rejouer_element.textContent = slider_element.value;
-*/
+   block_rejouer_element.textContent = slider_element.value;
+ */
   let bouton_rejouer = block_rejouer_element.querySelector("button");
 
-  bouton_rejouer.addEventListener("click", function () {
+  bouton_rejouer.addEventListener('click', function () {
     block_rejouer_element.style.display = "none";
-    let remise_a_zero = document.querySelectorAll(".box");
+    let remise_a_zero = document.querySelectorAll(".box")
     console.log(remise_a_zero);
     for (let i = 0; i < remise_a_zero.length; i++) {
       remise_a_zero[i].remove();
     }
     jeu(slider_element.value);
   });
+
 }
 
 jeu(INIT_NB_MEMO); //Appel de la fonction principale
