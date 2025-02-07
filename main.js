@@ -1,37 +1,38 @@
-import pokemon from "./data/pokemon_4x6.js";
+import pokemon from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
 
 function jeu() {
-  creer_buissons(12);
-  const memo_pokemons = disposer_pokemons(12, pokemon);
-  clic(memo_pokemons);
+  //Fonction principale qui vient lancer les "sous-fonctions"
+  creer_buissons(12); //Fonction qui crée l'affichage des buissons
+  const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
+  clic(memo_pokemons); //On appelle la fonction qui gère les actions au clic
 }
 
 function creer_buissons(nb_memos) {
-  //Fonction qui créer tous les buissons
+  //Fonction qui crée tous les buissons
   for (let i = 0; i < nb_memos; i++) {
-    creer_element("./assets/bush.webp", i);
+    creer_element("./assets/bush.webp", i); //Appel de la fonction pour créer un élément avec le lien et l'indice
   }
 }
 
 function creer_element(image_source, id) {
-  const grille = document.querySelector("#grille_de_jeu");
+  //Fonction qui crée les éléments
+  const grille = document.querySelector("#grille_de_jeu"); //On récupère la grille de jeu (là où nous devons afficher les éléments)
 
-  let element = document.createElement("div");
-  element.classList.add("box"); // Ajout de la classe box
-  element.id = id.toString();
+  let element = document.createElement("div"); //Création de la div
+  element.classList.add("box"); //Ajout de la classe box
+  element.id = id.toString(); //Conversion de l'id en chaine de caractere et association
 
-  let image = document.createElement("img");
-  image.src = image_source;
-  image.classList.add("bush");
+  let image = document.createElement("img"); //Création de l'image
+  image.src = image_source; //On récupère la source de l'image
+  image.classList.add("bush"); //On ajoute la classe bush
 
-  element.appendChild(image);
-  grille.appendChild(element);
+  element.appendChild(image); //On ajoute l'image dans la div
+  grille.appendChild(element); //On ajoute la div dans la grille
 }
 
 function disposer_pokemons(nb_memos, pokemon) {
-  //Fonction qui va disposer les pokemons
+  //Fonction qui va "disposer" les pokémons
   let placement_grille = [];
-  let liste_nombre_aleatoire = [];
 
   while (placement_grille.length < nb_memos) {
     let nombre_aleatoire = Math.floor(Math.random() * nb_memos);
@@ -101,8 +102,10 @@ function clic(memo_pokemons) {
 }
 
 function gagne(tableau_lance, memo_pokemons) {
-  let coup = document.getElementById("stat_nombre_de_coups");
-  coup += 1;
+  let compteur = document.getElementById("stat_nombre_de_coups");
+  let nb_coups = parseInt(compteur.textContent);
+  compteur.textContent = nb_coups + 1;
+
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
   ) {
