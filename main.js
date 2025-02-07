@@ -1,10 +1,10 @@
 import pokemon from "./data/pokemon_4x6.js"; //On importe le tableau des pokémons (leur nom et le lien de l'image)
 
-function jeu() {
+function jeu(nb_buissons) {
   //Fonction principale qui vient lancer les "sous-fonctions"
 
   let fini = 0; //Variable qui fixe la fin du jeu
-  creer_buissons(12); //Fonction qui crée l'affichage des buissons
+  creer_buissons(nb_buissons); //Fonction qui crée l'affichage des buissons
   const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
   clic(memo_pokemons, fini); //On appelle la fonction qui gère les actions au clic
 }
@@ -97,6 +97,7 @@ function clic(memo_pokemons, fini) {
         nb++; //On augmente la variable
         image.src = memo_pokemons[i][1]; //Source de l'image
         image.classList.add("pokemon"); //On ajoute la classe pokemon
+        image.classList.add("animate__animated", "animate__zoomIn");
         image.classList.remove("bush"); //On retire la classe bush
       }
       if (nb == 2) {
@@ -124,11 +125,10 @@ function gagne(tableau_lance, memo_pokemons, fini) {
     localStorage.setItem("record", nb_coups);
     record = nb_coups;
 
-  // Affichage du record
-  let affiche_record = document.getElementById("stat_record");
-  affiche_record.textContent = record;
-}
-
+    // Affichage du record
+    let affiche_record = document.getElementById("stat_record");
+    affiche_record.textContent = record;
+  }
 
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
@@ -146,11 +146,18 @@ function gagne(tableau_lance, memo_pokemons, fini) {
     img_pokeball1.classList.add("pokeball"); //On ajoute la classe pokeball
     img_pokeball2.classList.add("pokeball");
 
+    img_pokeball1.classList.add("animate__animated", "animate__fadeIn");
+    img_pokeball2.classList.add("animate__animated", "animate__fadeIn");
+
     div1.appendChild(img_pokeball1); //On affiche
     div2.appendChild(img_pokeball2);
 
     let barre = document.querySelector(".liste_pokemons_captures"); //On récupère la barre des pokemons capturés
     let image_pokemon_capture = document.createElement("img"); //On crée une image
+    image_pokemon_capture.classList.add(
+      "animate__animated",
+      "animate__bounceInRight"
+    );
 
     image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1]; //On récupère la source de celui capturé
     barre.appendChild(image_pokemon_capture); //On affiche celui capturé
@@ -183,4 +190,4 @@ function fin() {
   stop;
 }
 
-jeu(); //Appel de la fonction principale
+jeu(12); //Appel de la fonction principale
