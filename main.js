@@ -65,3 +65,4 @@ creer_buissons(12);
 const memo_pokemons = disposer_pokemons(12, pokemon);
 console.log(pokemon);
 clic();
+ #test
