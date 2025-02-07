@@ -3,10 +3,7 @@ import pokemon from "./data/pokemon_4x6.js";
 function jeu() {
   creer_buissons(12);
   const memo_pokemons = disposer_pokemons(12, pokemon);
-
-  while () {
-    clic(memo_pokemons);
-  }
+  clic(memo_pokemons);
 }
 
 function creer_buissons(nb_memos) {
@@ -80,7 +77,7 @@ function disposer_pokemons(nb_memos, pokemon) {
 function clic(memo_pokemons) {
   let nb = 0;
   let tableau_lance = [];
-  const grille = document.querySelector("#grille_de_jeu");
+  let grille = document.querySelector("#grille_de_jeu");
   let division = grille.querySelectorAll("div");
 
   for (let i = 0; i < division.length; i++) {
@@ -136,6 +133,7 @@ function gagne(tableau_lance, memo_pokemons) {
       image2.src = "./assets/bush.webp";
     }, 1000);
   }
+  clic(memo_pokemons);
 }
 
 jeu();
