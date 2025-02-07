@@ -48,8 +48,6 @@ function disposer_pokemons(nb_memos, pokemon) {
     }
   }
 
-  console.log(placement_grille);
-
   for (let i = 0; i < 20; i++) {
     let indice_aleatoire_1 = Math.floor(Math.random() * nb_memos);
     let indice_aleatoire_2 = Math.floor(Math.random() * nb_memos);
@@ -80,6 +78,7 @@ function clic(memo_pokemons) {
     let image = division[i].querySelector("img");
     division[i].onclick = function () {
       if (nb < 2) {
+        console.log(memo_pokemons);
         tableau_lance.push(memo_pokemons[i][0]);
         nb++;
         image.src = memo_pokemons[i][1];
@@ -111,4 +110,3 @@ const memo_pokemons = disposer_pokemons(12, pokemon);
 
 clic(memo_pokemons);
 console.log(pokemon);
-clic();
