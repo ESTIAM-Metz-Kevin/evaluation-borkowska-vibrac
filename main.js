@@ -2,9 +2,10 @@ import pokemon from "./data/pokemon_4x6.js"; //On importe le tableau des pokémo
 
 function jeu() {
   //Fonction principale qui vient lancer les "sous-fonctions"
+  let fini = 0; //Variable qui fixe la fin du jeu
   creer_buissons(12); //Fonction qui crée l'affichage des buissons
   const memo_pokemons = disposer_pokemons(12, pokemon); //On crée l'emplacement des pokémons
-  clic(memo_pokemons); //On appelle la fonction qui gère les actions au clic
+  clic(memo_pokemons, fini); //On appelle la fonction qui gère les actions au clic
 }
 
 function creer_buissons(nb_memos) {
@@ -78,7 +79,7 @@ function disposer_pokemons(nb_memos, pokemon) {
   return placement_grille; //On retourne le bon affichage
 }
 
-function clic(memo_pokemons) {
+function clic(memo_pokemons, fini) {
   //Fonction lors du clic
   let nb = 0; //Nombre de clics
   let tableau_lance = []; //Tableau pour stocker les pokémons cliqués
@@ -100,13 +101,13 @@ function clic(memo_pokemons) {
       if (nb == 2) {
         //Quand 2 sont sélectionnés
         nb += 1; //On augmente de nouveau pour ne pas rerentrer dans le if
-        return gagne(tableau_lance, memo_pokemons); //On appelle une fonction pour voir si on a gagné ou nn
+        fini = gagne(tableau_lance, memo_pokemons, fini); //On appelle une fonction pour voir si on a gagné ou nn
       }
     };
   }
 }
 
-function gagne(tableau_lance, memo_pokemons) {
+function gagne(tableau_lance, memo_pokemons, fini) {
   //Fonction qui vérifie le mémo
   let compteur = document.getElementById("stat_nombre_de_coups"); //On récupère la variable pour le nombre de coups
   let nb_coups = parseInt(compteur.textContent); //On récupère le nombre de coups actuels
@@ -115,6 +116,7 @@ function gagne(tableau_lance, memo_pokemons) {
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
   ) {
+    fini += 2;
     let div1 = document.getElementById(tableau_lance[0]); //On récupère l'id
     let div2 = document.getElementById(tableau_lance[1]);
 
@@ -154,7 +156,16 @@ function gagne(tableau_lance, memo_pokemons) {
       image2.classList.remove("pokemon");
     }, 1000);
   }
-  clic(memo_pokemons); //On rappelle la fonction clic
+  if (fini == memo_pokemons.length) {
+    return fin();
+  } else {
+    clic(memo_pokemons, fini); //On rappelle la fonction clic
+  }
+}
+
+function fin() {
+  console.log;
+  stop;
 }
 
 jeu(); //Appel de la fonction principale
