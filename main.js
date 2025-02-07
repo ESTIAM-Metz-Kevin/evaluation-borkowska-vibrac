@@ -81,8 +81,8 @@ function clic(memo_pokemons) {
         tableau_lance.push(i);
         nb++;
         image.src = memo_pokemons[i][1];
-        image.style.height = "80px";
-        image.style.width = "auto";
+        image.classList.add("pokemon");
+        image.classList.remove("bush");
       }
       if (nb == 2) {
         return gagne(tableau_lance, memo_pokemons);
@@ -95,7 +95,6 @@ function gagne(tableau_lance, memo_pokemons) {
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0]
   ) {
-    console.log("OK");
     let div1 = document.getElementById(tableau_lance[0]);
     let div2 = document.getElementById(tableau_lance[1]);
 
@@ -105,23 +104,17 @@ function gagne(tableau_lance, memo_pokemons) {
     img_pokeball1.src = "./assets/pokeball.png";
     img_pokeball2.src = "./assets/pokeball.png";
 
+    img_pokeball1.classList.add("pokeball");
+    img_pokeball2.classList.add("pokeball");
+
     div1.appendChild(img_pokeball1);
     div2.appendChild(img_pokeball2);
 
-    img_pokeball1.style.height = "40px";
-    img_pokeball1.style.width = "auto";
-    img_pokeball1.style.display = "flex";
-    img_pokeball1.position = "absolute";
-    img_pokeball1.style.top = "0";
-    img_pokeball1.style.right = "0";
+    let barre = document.querySelector(".liste_pokemons_captures");
+    let image_pokemon_capture = document.createElement("img");
 
-    img_pokeball2.style.height = "40px";
-    img_pokeball2.style.width = "auto";
-    img_pokeball2.style.position = "absolute";
-    img_pokeball2.style.top = "0";
-    img_pokeball2.style.left = "0";
-
-    div1.position = "relative";
+    image_pokemon_capture.src = memo_pokemons[tableau_lance[0]][1];
+    barre.appendChild(image_pokemon_capture);
   }
 }
 
