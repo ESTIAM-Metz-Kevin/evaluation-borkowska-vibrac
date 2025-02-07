@@ -52,6 +52,16 @@ function disposer_pokemons(nb_memos, pokemon) {
   return placement_grille;
 }
 
+function clic() {
+  const grille = document.querySelector("#grille_de_jeu");
+  let division = grille.querySelectorAll("div");
+  console.log(division);
+  division.addEventListener("click", function () {
+    console.log("Aaa");
+  });
+}
+
 creer_buissons(12);
 const memo_pokemons = disposer_pokemons(12, pokemon);
 console.log(pokemon);
+clic();
