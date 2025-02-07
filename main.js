@@ -108,17 +108,25 @@ function clic(memo_pokemons, fini) {
   }
 }
 
-function gagne(tableau_lance, memo_pokemons) {
+function gagne(tableau_lance, memo_pokemons, fini) {
   let compteur = document.getElementById("stat_nombre_de_coups");
   let nb_coups = parseInt(compteur.textContent);
   compteur.textContent = nb_coups + 1;
-  let record = 0
-  if (nb_coups > record)
-  {
-    let stock_record = nb_coups;
-    localStorage.getItem("record", stock_record )
-  }
+
+  // Récupération du record depuis le localStorage (ou 0 s'il n'existe pas encore)
+  let record = localStorage.getItem("record");
+  record = record ? parseInt(record) : Infinity; // Par défaut, on considère un record très élevé
+
+  // Mise à jour du record si nécessaire
+  if (nb_coups < record) {
+    localStorage.setItem("record", nb_coups);
+    record = nb_coups;
+
+  // Affichage du record
   let affiche_record = document.getElementById("stat_record");
+  affiche_record.textContent = record;
+}
+
 
   if (
     memo_pokemons[tableau_lance[0]][0] == memo_pokemons[tableau_lance[1]][0] //Si les 2 noms sont les mêmes -> bon mémo
